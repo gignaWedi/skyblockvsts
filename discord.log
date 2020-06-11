@@ -4119,3 +4119,13 @@
 2020-06-11 18:07:19,701:DEBUG:discord.client: Dispatching event socket_raw_receive
 2020-06-11 18:07:19,701:DEBUG:discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
 2020-06-11 18:07:19,701:DEBUG:discord.client: Dispatching event socket_response
+2020-06-11 18:08:00,894:DEBUG:discord.gateway: Keeping websocket alive with sequence 310.
+2020-06-11 18:08:00,894:DEBUG:discord.client: Dispatching event socket_raw_send
+2020-06-11 18:08:00,984:DEBUG:discord.client: Dispatching event socket_raw_receive
+2020-06-11 18:08:00,985:DEBUG:discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2020-06-11 18:08:00,985:DEBUG:discord.client: Dispatching event socket_response
+2020-06-11 18:08:42,145:DEBUG:discord.gateway: Keeping websocket alive with sequence 310.
+2020-06-11 18:08:42,146:DEBUG:discord.client: Dispatching event socket_raw_send
+2020-06-11 18:08:42,204:DEBUG:discord.client: Dispatching event socket_raw_receive
+2020-06-11 18:08:42,205:DEBUG:discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2020-06-11 18:08:42,205:DEBUG:discord.client: Dispatching event socket_response

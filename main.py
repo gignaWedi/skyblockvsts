@@ -48,24 +48,6 @@ async def on_ready():
   client.help_command.no_category = "Misc."
   print(client.user)
 
-'''
-@client.command()
-async def auction(ctx, item, starting_price: int):
-  pass
-
-@client.command()
-async def bid(ctx, item, num: typing.Optional[int] = 5):
-  pass
-
-@client.command()
-async def freeze(ctx, item):
-  pass
-
-@client.command()
-async def unfreeze(ctx, item):
-  pass 
-'''
-
 keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")
 client.run(token)
