@@ -19,8 +19,11 @@ def remove_all(id):
   a= {d["id"] for d in trades.search("Discord_ID", id)}
   return trades.batch_delete(a)
 
+def user(id):
+  return users.search("Discord_ID", id)
+
 def add_user(id):
-  if not users.search("Discord_ID", id):
+  if not user(id):
     users.insert({"Discord_ID": id, "Vouches": 0, "Reports":0})
 
 def new_trade(id, item, price):

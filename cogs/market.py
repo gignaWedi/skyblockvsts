@@ -19,6 +19,9 @@ class Market(commands.Cog):
   def __init__(self, client):
     self.client = client
 
+  def cog_check(self, ctx):
+    return 718522244996923524 in [r.id for r in self.client.get_guild(717177487091695677).get_member(ctx.author.id).roles]
+
   @commands.command()
   async def sell(self, ctx, price: int, *, item):
     start = time.time() 
@@ -32,6 +35,10 @@ class Market(commands.Cog):
         return
       item = item_id(item)
     
+    if price > 1_000_000_000_000:
+      await channel.send("Too large of a price. Price cap is 1 trillion coins.")
+      return
+
     new_trade(str(user.id), item, price)
     print(time.time()-start)
     await channel.send(f"New posting of {item.upper()} for {price} coins created.")
@@ -141,7 +148,6 @@ class Market(commands.Cog):
       price = l["Price"]
       user_id = l["Discord_ID"]
       stats = profile(str(user_id))
-      stats = [0,0]
 
       m += f"{i}. {price} coins. {stats[0]} vouches, {stats[1]} reports.\n"
     

@@ -43,6 +43,10 @@ for filename in os.listdir("./cogs"):
   if filename.endswith(".py"):
     client.load_extension(f"cogs.{filename[:-3]}")
 
+@client.event
+async def on_ready():
+  client.help_command.no_category = "Misc."
+  print(client.user)
 
 '''
 @client.command()

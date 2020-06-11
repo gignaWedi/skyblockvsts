@@ -7,6 +7,9 @@ class Ratings(commands.Cog):
   def __init__(self, client):
     self.client = client
 
+  def cog_check(self, ctx):
+    return 718522244996923524 in [r.id for r in self.client.get_guild(717177487091695677).get_member(ctx.author.id).roles]
+
   @commands.command(name="profile")
   async def _profile(self, ctx, user: typing.Optional[discord.User]=None):
     channel = ctx.channel

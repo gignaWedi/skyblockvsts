@@ -4,20 +4,19 @@ import time
 from database import *
 import os
 
-async def is_me(ctx):
-  return ctx.author.id == 395644655242444810
 
 class Debug(commands.Cog):
   def __init__(self, client):
     self.client = client
   
+  def cog_check(self, ctx):
+    return ctx.author.id == 395644655242444810
+
   @commands.command()
-  @commands.check(is_me)
   async def ping(self, ctx):
     await ctx.send(f"Pong! {round(self.client.latency,1)}.")
   
   @commands.command(name="time")
-  @commands.check(is_me)
   async def _time(self, ctx):
     await ctx.send("> Time activate.")
 
