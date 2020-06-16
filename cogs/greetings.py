@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from database import *
 
 class Greetings(commands.Cog):
   def __init__(self, client):

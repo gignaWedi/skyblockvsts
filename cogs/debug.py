@@ -1,9 +1,7 @@
 import discord
 from discord.ext import commands
 import time
-from database import *
 import os
-
 
 class Debug(commands.Cog):
   def __init__(self, client):
@@ -30,6 +28,10 @@ class Debug(commands.Cog):
     end = time.time()
     delta = end - start
     await ctx.send(f"> Operation took {round(delta, 3)}.")
-    
+  
+  @commands.command()
+  async def kill(self, ctx):
+    await self.client.logout()
+	
 def setup(client):
   client.add_cog(Debug(client))

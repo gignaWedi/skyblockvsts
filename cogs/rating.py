@@ -1,5 +1,4 @@
 import discord
-from database import *
 from discord.ext import commands
 import typing
 
@@ -12,14 +11,15 @@ class Ratings(commands.Cog):
 
   @commands.command(name="profile")
   async def _profile(self, ctx, user: typing.Optional[discord.User]=None):
+    db = self.client.get_cog("Database")
     channel = ctx.channel
     
     if user == None:
       user = ctx.author
     
-    listings = sales(str(user.id))
+    listings = db.sales(str(user.id))
 
-    stats = profile(user.id)
+    stats = db.profile(str(user.id))
 
     if not stats:
       await channel.send(f"{str(user)} hasn't used this trading service yet.")
@@ -31,9 +31,8 @@ class Ratings(commands.Cog):
       m += "None\n"
     
     for l in listings:
-      item = l["Item_ID"].upper()
-      price = l["Price"]
-      m += f"**{item}**: {price} coins\n"
+      item, price = l
+      m += f"**{item.upper()}**: {price} coins\n"
     
     m += f"\n> {stats[0]} vouch(es), {stats[1]} report(s)."
 
@@ -41,13 +40,14 @@ class Ratings(commands.Cog):
 
   @commands.command()
   async def vouch(self, ctx, *, user: discord.User):
+    db = self.client.get_cog("Database")
     voucher = ctx.author
     
     if user == voucher:
       await ctx.send("You can't vouch yourself.")
       return
     
-    error = feedback(str(user.id), 1, str(voucher.id))
+    error = db.feedback(str(user.id), 1, str(voucher.id))
 
     if error == 0:
       await ctx.send("That user has not made any offers yet.")
@@ -65,13 +65,14 @@ class Ratings(commands.Cog):
 
   @commands.command()
   async def report(self, ctx, *, user: discord.User):
+    db = self.client.get_cog("Database")
     voucher = ctx.author
     
     if user == voucher:
       await ctx.send("You can't report yourself.")
       return
     
-    error = feedback(str(user.id), -1, str(voucher.id))
+    error = db.feedback(str(user.id), -1, str(voucher.id))
 
     if error == 0:
       await ctx.send("That user has not made any offers yet.Make a listing or intiate a trade offer first.")
@@ -89,13 +90,14 @@ class Ratings(commands.Cog):
 
   @commands.command()
   async def unrate(self, ctx, *, user: discord.User):
+    db = self.client.get_cog("Database")
     voucher = ctx.author
     
     if user == voucher:
       await ctx.send("You can't unrate yourself.")
       return
     
-    feedback(str(user.id), 0, str(voucher.id))
+    db.feedback(str(user.id), 0, str(voucher.id))
 
     await ctx.send(f"You have cleared your rating of {str(user)}.")
 
