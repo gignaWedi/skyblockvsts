@@ -29,7 +29,7 @@ class Database(commands.Cog):
 
   def remove_trade(self, id, item):
     keys = []
-    for e in find(id, item): 
+    for e in self.find(id, item): 
       keys.append(e.key)
     dbclient.delete_multi(keys)
     return keys 
@@ -63,7 +63,7 @@ class Database(commands.Cog):
   def new_trade(self, id, item, price):
     self.add_user(id)
     
-    ent = find(id, item)
+    ent = self.find(id, item)
     if ent:
       ent[0]["Price"] = price
       dbclient.put(ent[0])
