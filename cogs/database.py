@@ -81,10 +81,18 @@ class Database(commands.Cog):
     query = dbclient.query(kind="Sale")
     query.add_filter("Item_ID", "=", item)
     #query.order = ["Price"]
+
+    remove = self.find(id, item)
     
-    results = query.fetch(limit=listings)
-    return list(results)
+    results = query.fetch(limit=listings+1)
+    results = list(results)
+  
+    for r in remove:
+      if r in results:
+        results.remove(r)
     
+    return results
+
   def item_list(self):
     query = dbclient.query(kind="Item")
     result = list(query.fetch())

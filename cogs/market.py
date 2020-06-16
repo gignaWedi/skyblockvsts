@@ -37,7 +37,7 @@ class Market(commands.Cog):
   
   def debounce(self, item, id):
     db = self.client.get_cog("Database")
-    num=50 
+    num=25 
     debounce_time=20
     def decay(x):
       return x * math.exp(-1/num)
@@ -45,12 +45,14 @@ class Market(commands.Cog):
     entry = (item,id)
     if entry not in d_lst:
       d_lst.append(entry)
-      d = get_item_stats(item)["Demand"]
-      set_demand(item, decay(d)+1)
-      for key in item_list():
+      d = db.get_item_stats(item)["Demand"]
+      db.set_demand(item, decay(d)+1)
+      d2 = db.get_item_stats(item)["Demand"]
+      print(f"Demand for {item} increased: {d:.3f} => {d2:.3f}.")
+      for key in db.item_list():
         if key != item:
-          demand = get_item_stats(key)["Demand"]
-          set_demand(key, decay(demand))
+          demand = db.get_item_stats(key)["Demand"]
+          db.set_demand(key, decay(demand))
           
       time.sleep(debounce_time)
       d_lst.remove(entry)
@@ -78,7 +80,7 @@ class Market(commands.Cog):
     db = self.client.get_cog("Database")
     item = self.convert(item.lower())
     if not item:
-      await channel.send(f'"{item}" is not a valid item name. Use -list to see the list of valid item names.')
+      await ctx.send(f'"{item}" is not a valid item name. Use -list to see the list of valid item names.')
       return
     
     stats = db.get_item_stats(item)
@@ -119,7 +121,7 @@ class Market(commands.Cog):
     db = self.client.get_cog("Database")
     item = self.convert(item.lower())
     if not item:
-      await channel.send(f'"{item}" is not a valid item name. Use -list to see the list of valid item names.')
+      await ctx.send(f'"{item}" is not a valid item name. Use -list to see the list of valid item names.')
       return
       
     names = db.alias(item)
