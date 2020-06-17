@@ -167,11 +167,6 @@ class Market(commands.Cog):
     
     await channel.send(f"Removed listing for {item.upper()}.")
 
-  #@commands.Cog.listener()
-  async def on_command(self, ctx):
-    pass
-    
-
   @commands.command()
   async def buy(self, ctx, *, item):
     channel = ctx.channel

@@ -80,7 +80,6 @@ class Database(commands.Cog):
     
     query = dbclient.query(kind="Sale")
     query.add_filter("Item_ID", "=", item)
-    #query.order = ["Price"]
 
     remove = self.find(id, item)
     
@@ -91,7 +90,7 @@ class Database(commands.Cog):
       if r in results:
         results.remove(r)
     
-    return results
+    return sorted(results, key=lambda x: x["Price"])
 
   def item_list(self):
     query = dbclient.query(kind="Item")
