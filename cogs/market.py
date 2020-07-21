@@ -38,7 +38,7 @@ class Market(commands.Cog):
   def debounce(self, item, id):
     db = self.client.get_cog("Database")
     num=25 
-    debounce_time=20
+    debounce_time=20*60
     def decay(x):
       return x * math.exp(-1/num)
     
@@ -196,8 +196,9 @@ class Market(commands.Cog):
     for i, l in enumerate(listings, 1):
       price = l["Price"]
       user_id = l["Discord_ID"]
-      stats = db.profile(str(user_id))
 
+      stats = db.profile(str(user_id))
+      
       m += f"{i}. {price} coins. {stats[0]} vouches, {stats[1]} reports.\n"
     
 

@@ -16,7 +16,7 @@ class Errors(commands.Cog):
       await ctx.send("You are unable to use this command.")
       return
     
-    self.client.on_command_error(ctx, error)
+    await self.client.on_command_error(ctx, error)
   
 def setup(client):
   client.add_cog(Errors(client))

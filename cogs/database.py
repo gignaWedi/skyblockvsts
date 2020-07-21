@@ -75,13 +75,17 @@ class Database(commands.Cog):
     e["Price"] = price
     dbclient.put(e)
 
-  def search(self, item,id,listings=5):  
-    self.add_user(id)
+  def search(self, item,id=None,listings=5):  
+    if id:
+      self.add_user(id)
     
     query = dbclient.query(kind="Sale")
     query.add_filter("Item_ID", "=", item)
 
-    remove = self.find(id, item)
+    if id:
+      remove = self.find(id, item)
+    else:
+      remove = []
     
     results = query.fetch(limit=listings+1)
     results = list(results)
@@ -122,9 +126,9 @@ class Database(commands.Cog):
     if not user:
       return 0
     
-    invoker = dbclient.get(e2key)
+    invoke = dbclient.get(e2key)
     
-    if not invoker:
+    if not invoke:
       return 1
     
     

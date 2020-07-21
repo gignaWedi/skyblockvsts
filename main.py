@@ -11,8 +11,6 @@ handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w'
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
 
-from keep_alive import keep_alive
-
 client = commands.Bot(command_prefix="-")
 
 async def is_me(ctx):
@@ -46,6 +44,5 @@ async def on_ready():
   client.help_command.no_category = "Misc."
   print(client.user)
 
-keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")
 client.run(token)

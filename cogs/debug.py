@@ -32,6 +32,7 @@ class Debug(commands.Cog):
   @commands.command()
   async def kill(self, ctx):
     await self.client.logout()
+    exit(0)
 	
 def setup(client):
   client.add_cog(Debug(client))

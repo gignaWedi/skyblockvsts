@@ -1,16 +1,31 @@
 <!doctype html>
 <html>
 <head>
-  <title>Datastore and Firebase Auth Example</title>
+  <title>Islands Proto-Site</title>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-  <h1>Datastore and Firebase Auth Example</h1>
-
-  <h2>Last 10 visits</h2>
-  {% for time in times %}    <p>{{ time }}</p>
+  <h1>Islands Proto-Site</h1>
+  
+  <h2>Listings for Gold Smelted</h2>
+  
+  <table>
+  <TR>
+     <TH>Price</TH>
+     <TH>Vouches</TH>
+     <TH>Reports</TH>
+  </TR>
+  
+  {% for item in items %}
+  <TR>
+     <TD>{{item[0]}}</TD>
+     <TD>{{item[1]}}</TD>
+     <TD>{{item[2]}}</TD>
+  </TR>
   {% endfor %}
+  </table>
+  
 </body>
 </html>
