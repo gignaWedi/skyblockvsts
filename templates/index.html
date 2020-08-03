@@ -1,4 +1,4 @@
-<!doctype html>
+<!--<!doctype html>
 <html>
 <head>
   <title>Islands Proto-Site</title>
@@ -26,6 +26,30 @@
   </TR>
   {% endfor %}
   </table>
-  
+
+
 </body>
-</html>
+</html>-->
+
+<doctype html="">
+    <title>Flask Music Database</title>
+<h2>Flask Music Database</h2>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% from "_formhelpers.html" import render_field %}
+<form method="post">
+  <dl>
+    {{ render_field(form.select) }}
+    <p>
+    {{ render_field(form.search) }}
+  </p></dl>
+  <p><input type="submit" value="Search">
+</p></form>
+</doctype>

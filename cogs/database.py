@@ -8,6 +8,7 @@ dbclient = datastore.Client()
 class Database(commands.Cog):
   def __init__(self, client):
     self.client = client
+    self.dbc = dbclient
     
   def find(self, id, item):
     query = dbclient.query(kind="Sale")

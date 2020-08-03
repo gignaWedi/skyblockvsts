@@ -29,6 +29,7 @@ class Market(commands.Cog):
   
   def convert(self, item):
     database = self.client.get_cog("Database")
+    item = item.lower()
     if item not in database.item_list():
       item = database.item_id(item)
       if not item:
